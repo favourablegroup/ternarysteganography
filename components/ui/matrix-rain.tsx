@@ -26,9 +26,6 @@ export function MatrixRain() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      ctx.fillStyle = '#fff'
-      ctx.font = '15px monospace'
-
       for (let i = 0; i < drops.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)]
         const opacity = Math.random() * 0.5 + 0.5
@@ -47,7 +44,12 @@ export function MatrixRain() {
     const resizeHandler = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
+      drops.length = Math.floor(canvas.width / 15)
+      while (drops.length < Math.floor(canvas.width / 15)) {
+        drops.push(1)
+      }
     }
+
     window.addEventListener('resize', resizeHandler)
 
     return () => {
