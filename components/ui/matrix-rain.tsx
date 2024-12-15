@@ -26,18 +26,19 @@ export function MatrixRain() {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     function draw() {
-      const ctx = ctxRef.current
       const canvas = canvasRef.current
+      const ctx = ctxRef.current
       if (!ctx || !canvas) return
 
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+      ctx.font = '12px monospace'
+
       for (let i = 0; i < dropsRef.current.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)]
         const opacity = Math.random() * 0.5 + 0.5
         ctx.fillStyle = `rgba(0, 255, 255, ${opacity})`
-        ctx.font = '12px monospace'
         ctx.fillText(text, i * 15, dropsRef.current[i] * 15)
 
         if (dropsRef.current[i] * 15 > canvas.height && Math.random() > 0.975) {
