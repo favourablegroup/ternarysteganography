@@ -28,34 +28,34 @@ Try it out at [demo hosted on vercel](https://ternarysteganography.vercel.app/)
 
 ## 🏗️ Installation
 
-1. Clone the repository:
+## 1. Clone the repository:
       bash
       git clone https://github.com/yourusername/ternary-phonographic-steganography.git
 
-3. Install dependencies:
+## 3. Install dependencies:
       bash
       CopyInsert
       cd ternary-phonographic-steganography
       npm install
 
-5. Run the development server:
+## 5. Run the development server:
       bash
       CopyInsert in Terminal
       npm run dev
       Open http://localhost:3000 in your browser
 
-📖 How to Use
-    Encrypting a Message
-    Navigate to the Encrypt page
-    Enter your secret message
-    Upload or drag & drop a cover image
-    Click "Generate Hash" to create your encryption key
-    Save both the generated steganographic image and hash key
-    Decrypting a Message
-    Navigate to the Decrypt page
-    Upload the steganographic image
-    Enter the hash key
-    Click "Decrypt" to reveal the hidden message
+## 📖 How to Use
+      Encrypting a Message
+      Navigate to the Encrypt page
+      Enter your secret message
+      Upload or drag & drop a cover image
+      Click "Generate Hash" to create your encryption key
+      Save both the generated steganographic image and hash key
+      Decrypting a Message
+      Navigate to the Decrypt page
+      Upload the steganographic image
+      Enter the hash key
+      Click "Decrypt" to reveal the hidden message
 
 
 ## 🔒 Privacy & Security
