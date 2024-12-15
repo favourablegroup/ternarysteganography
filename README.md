@@ -1,7 +1,7 @@
 # Ternary Steganography
 
 <div align="center">
-  <img src="https://favourable.group/wp-content/uploads/2023/08/page_loader_small_cropped.gif" alt="Ternary Steganography Logo" width="200" style="border-radius="50%"/>
+  <img src="https://favourable.group/wp-content/uploads/2023/08/page_loader_small_cropped.gif" alt="Ternary Steganography Logo" width="200" style="border-radius="0.5"/>
   <p><em>Hide messages in images using ternary encoding</em></p>
 </div>
 
