@@ -2,18 +2,27 @@
 
 import { useEffect, useState, useMemo } from 'react'
 
+interface Column {
+  id: number
+  delay: number
+  duration: number
+}
+
 export function MatrixRain() {
-  const [columns, setColumns] = useState<number[]>([])
+  const [columns, setColumns] = useState<Column[]>([])
   
   useEffect(() => {
     const updateColumns = () => {
       const width = window.innerWidth
       const numColumns = Math.floor(width / 20)
-      const columnData = Array.from({ length: numColumns }, (_, i) => ({
-        id: i,
-        delay: Math.random() * 5,
-        duration: Math.random() * 5 + 8
-      }))
+      const columnData: Column[] = Array.from(
+        { length: numColumns }, 
+        (_, i) => ({
+          id: i,
+          delay: Math.random() * 5,
+          duration: Math.random() * 5 + 8
+        })
+      )
       setColumns(columnData)
     }
     
