@@ -45,13 +45,15 @@ Try it out at [demo hosted on vercel](https://ternarysteganography.vercel.app/)
       Open http://localhost:3000 in your browser
 
 ## 📖 How to Use
-      Encrypting a Message
+
+## Encrypting a Message
       Navigate to the Encrypt page
       Enter your secret message
       Upload or drag & drop a cover image
       Click "Generate Hash" to create your encryption key
       Save both the generated steganographic image and hash key
-      Decrypting a Message
+
+## Decrypting a Message
       Navigate to the Decrypt page
       Upload the steganographic image
       Enter the hash key
