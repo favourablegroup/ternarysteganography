@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
 interface DragDropZoneProps {
@@ -17,6 +17,7 @@ export function DragDropZone({
   children
 }: DragDropZoneProps) {
   const [isDragging, setIsDragging] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -49,18 +50,40 @@ export function DragDropZone({
     }
   }, [onFileAccepted, acceptedFileTypes])
 
+  const handleClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (!files || files.length === 0) return
+
+    const file = files[0]
+    if (acceptedFileTypes[0] === '*' || acceptedFileTypes.some(type => file.type.includes(type.replace('*', '')))) {
+      onFileAccepted(file)
+    }
+  }
+
   return (
     <div
+      onClick={handleClick}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       className={cn(
-        'relative rounded-lg transition-colors',
+        'relative rounded-lg transition-colors cursor-pointer',
         isDragging && 'bg-cyan-500/10 border-cyan-500',
         className
       )}
     >
+      <input 
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileInput}
+        accept={acceptedFileTypes.join(',')}
+        className="hidden"
+      />
       {isDragging && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg backdrop-blur-sm">
           <p className="text-cyan-400 text-lg font-semibold">Drop file here</p>
