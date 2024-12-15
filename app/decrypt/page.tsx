@@ -182,12 +182,16 @@ export default function DecryptionTool() {
                 <div className="space-y-2">
                   <Label>Steganographic Image</Label>
                   <DragDropZone 
-                    onFileDrop={handleImageDrop}
-                    accept="image/*"
-                    icon={<ImageIcon className="w-8 h-8" />}
-                    label="Drop encrypted image here"
-                    supportText="Supports PNG, JPG, GIF"
-                  />
+                    onFileAccepted={handleImageDrop}
+                    acceptedFileTypes={['image/png', 'image/jpeg', 'image/gif']}
+                    className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors"
+                  >
+                    <div className="flex flex-col items-center gap-2">
+                      <ImageIcon className="w-8 h-8 text-gray-400" />
+                      <p>Drop encrypted image here</p>
+                      <p className="text-sm text-gray-500">Supports PNG, JPG, GIF</p>
+                    </div>
+                  </DragDropZone>
                   <FileUpload
                     onFileSelect={(e) => {
                       const file = e.target.files?.[0]
@@ -216,7 +220,7 @@ export default function DecryptionTool() {
                   <Label className="text-cyan-400">Hash Key</Label>
                   <div className="space-y-2">
                     <DragDropZone 
-                      onFileDrop={handleHashKeyDrop}
+                      onDrop={handleHashKeyDrop}
                       accept=".txt,.svg,.png"
                       icon={<Key className="w-8 h-8" />}
                       label="Drop hash key file here"
