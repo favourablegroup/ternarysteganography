@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 180 100% 50%;
+ 
+    --card: 0 0% 0%;
+    --card-foreground: 180 100% 50%;
+ 
+    --popover: 0 0% 0%;
+    --popover-foreground: 180 100% 50%;
+ 
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
+ 
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+ 
+    --muted: 180 100% 50%;
+    --muted-foreground: 180 100% 85%;
+ 
+    --accent: 180 100% 50%;
+    --accent-foreground: 0 0% 0%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 180 100% 50%;
+ 
+    --border: 180 100% 50%;
+    --input: 180 100% 50%;
+    --ring: 180 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    background-color: black;
+    @apply bg-background text-cyan-400;
+  }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: black;
+}
+
+::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 255, 255, 0.3);
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(0, 255, 255, 0.5);
+}
+
+/* Firefox scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0, 255, 255, 0.3) rgba(0, 0, 0, 0.3);
+}
