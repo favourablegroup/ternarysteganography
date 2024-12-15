@@ -34,7 +34,7 @@ Try it out at [demo hosted on vercel](https://ternarysteganography.vercel.app/)
 ## 3. Install dependencies:
       bash
       CopyInsert
-      cd ternary-phonographic-steganography
+      cd ternarysteganography
       npm install
 
 ## 5. Run the development server:
