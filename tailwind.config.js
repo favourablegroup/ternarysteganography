@@ -2,9 +2,9 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{ts,tsx}',
   ],
   theme: {
@@ -75,7 +75,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         'matrix-rain': 'matrix-rain linear infinite'
       }
-    },
+    }
   },
   plugins: [require("tailwindcss-animate")],
 }

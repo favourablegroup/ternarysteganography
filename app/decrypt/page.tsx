@@ -78,7 +78,9 @@ export default function DecryptionTool() {
     }
   ]
 
-  const handleFileUpload = async (file: File) => {
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
     const reader = new FileReader()
     reader.onload = (e) => {
       setStegoImagePreview(e.target?.result as string)
@@ -93,6 +95,37 @@ export default function DecryptionTool() {
     return /^[-01]+$/.test(key);
   }
 
+  const handleHashKeySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (file.type === 'text/plain') {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const text = e.target?.result as string
+        if (validateHashKey(text)) {
+          setHash(text)
+          addStatus('Valid hash key loaded from text file', 'success')
+        } else {
+          addStatus('Invalid hash key format in text file', 'error')
+        }
+      }
+      reader.readAsText(file)
+    } else if (file.type.startsWith('image/')) {
+      addStatus('Processing image hash key...', 'info')
+      extractHashFromImage(file).then(extractedHash => {
+        if (validateHashKey(extractedHash)) {
+          setHash(extractedHash)
+          addStatus('Valid hash key extracted from image', 'success')
+        } else {
+          addStatus('Invalid hash key format in image', 'error')
+        }
+      }).catch(error => {
+        addStatus('Failed to extract hash from image: ' + error.message, 'error')
+      })
+    }
+  }
+
   const handleHashChange = (value: string) => {
     setHash(value)
     if (value.length === 2187) {
@@ -102,38 +135,6 @@ export default function DecryptionTool() {
         addStatus('Invalid hash key format. Key must only contain -, 0, and 1', 'error')
       }
     }
-  }
-
-  const handleHashKeyDrop = async (file: File) => {
-    try {
-      if (file.type === 'text/plain') {
-        const text = await file.text()
-        if (validateHashKey(text)) {
-          setHash(text)
-          addStatus('Valid hash key loaded from text file', 'success')
-        } else {
-          addStatus('Invalid hash key in text file. Key must be 2187 characters long and only contain -, 0, and 1', 'error')
-        }
-      } else if (file.type.startsWith('image/')) {
-        addStatus('Processing image hash key...', 'info')
-        const extractedHash = await extractHashFromImage(file)
-        if (validateHashKey(extractedHash)) {
-          setHash(extractedHash)
-          addStatus('Valid hash key extracted from image', 'success')
-        } else {
-          addStatus('Invalid hash key extracted from image. Key must be 2187 characters long and only contain -, 0, and 1', 'error')
-        }
-      } else {
-        addStatus('Unsupported file type. Please upload a .txt, .svg, or image file', 'error')
-      }
-    } catch (error) {
-      addStatus(`Failed to process hash key: ${error instanceof Error ? error.message : 'Unknown error'}`, 'error')
-    }
-  }
-
-  const handleImageDrop = (file: File) => {
-    setStegoImage(file)
-    addStatus('Encrypted image loaded successfully', 'success')
   }
 
   const handleDecrypt = async () => {
@@ -179,62 +180,38 @@ export default function DecryptionTool() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
+                <div>
                   <Label>Steganographic Image</Label>
-                  <DragDropZone 
-                    onFileAccepted={handleImageDrop}
-                    acceptedFileTypes={['image/png', 'image/jpeg', 'image/gif']}
-                    className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors"
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <ImageIcon className="w-8 h-8 text-gray-400" />
-                      <p>Drop encrypted image here</p>
-                      <p className="text-sm text-gray-500">Supports PNG, JPG, GIF</p>
+                  <div className="mt-2">
+                    <FileUpload
+                      onFileSelect={handleImageSelect}
+                      label="Upload Image"
+                      accept="image/*"
+                    />
+                  </div>
+                  {stegoImagePreview && (
+                    <div className="mt-4">
+                      <Label>Image Preview</Label>
+                      <div className="mt-2 border rounded-lg overflow-hidden">
+                        <img src={stegoImagePreview} alt="Preview" className="w-full" />
+                      </div>
                     </div>
-                  </DragDropZone>
-                  <FileUpload
-                    onFileSelect={(e) => {
-                      const file = e.target.files?.[0]
-                      if (!file) return
-                      handleFileUpload(file)
-                    }}
-                    label="Upload Image"
-                    accept="image/*"
-                  />
+                  )}
                 </div>
 
-                {stegoImagePreview && (
-                  <div className="space-y-2">
-                    <Label>Image Preview</Label>
-                    <div className="aspect-video w-full overflow-hidden rounded">
-                      <img
-                        src={stegoImagePreview}
-                        alt="Steganographic"
-                        className="object-contain w-full h-full"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="space-y-2">
+                <div>
                   <Label className="text-cyan-400">Hash Key</Label>
                   <div className="space-y-2">
-                    <DragDropZone 
-                      onFileAccepted={handleHashKeyDrop}
-                      acceptedFileTypes={['.txt', '.svg', '.png']}
-                      className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors"
-                    >
-                      <div className="flex flex-col items-center gap-2">
-                        <Key className="w-8 h-8 text-gray-400" />
-                        <p>Drop hash key file here</p>
-                        <p className="text-sm text-gray-500">Supports TXT, SVG, PNG</p>
-                      </div>
-                    </DragDropZone>
+                    <FileUpload
+                      onFileSelect={handleHashKeySelect}
+                      label="Upload Hash Key"
+                      accept=".txt,.svg,.png"
+                    />
                     <Input
                       value={hash}
                       onChange={(e) => handleHashChange(e.target.value)}
+                      placeholder="Or paste your hash key here..."
                       className="font-mono"
-                      placeholder="Enter or upload hash key"
                     />
                   </div>
                 </div>
