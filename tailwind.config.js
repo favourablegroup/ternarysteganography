@@ -66,8 +66,12 @@ module.exports = {
           to: { height: 0 },
         },
         'matrix-rain': {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(100vh)' }
+          '0%': { 
+            transform: 'translateY(-100%)'
+          },
+          '100%': { 
+            transform: 'translateY(100vh)'
+          }
         }
       },
       animation: {

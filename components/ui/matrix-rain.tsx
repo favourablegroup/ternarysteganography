@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useEffect, useState } from 'react'
 
@@ -17,6 +17,8 @@ export function MatrixRain() {
     return () => window.removeEventListener('resize', updateColumns)
   }, [])
 
+  const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンヴ'
+
   return (
     <div className="fixed top-0 left-0 w-full h-full -z-10 bg-black overflow-hidden">
       {columns.map((i) => (
@@ -26,13 +28,12 @@ export function MatrixRain() {
           style={{
             left: `${i * 20}px`,
             animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${Math.random() * 5 + 8}s`
+            animationDuration: `${Math.random() * 5 + 8}s`,
+            transform: 'translateY(-100%)'
           }}
         >
           {Array.from({ length: 30 }, () => 
-            '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンヴ'[
-              Math.floor(Math.random() * 75)
-            ]
+            characters[Math.floor(Math.random() * characters.length)]
           ).join('\n')}
         </div>
       ))}
