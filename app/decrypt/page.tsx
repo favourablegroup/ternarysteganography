@@ -220,12 +220,16 @@ export default function DecryptionTool() {
                   <Label className="text-cyan-400">Hash Key</Label>
                   <div className="space-y-2">
                     <DragDropZone 
-                      onDrop={handleHashKeyDrop}
-                      accept=".txt,.svg,.png"
-                      icon={<Key className="w-8 h-8" />}
-                      label="Drop hash key file here"
-                      supportText="Supports TXT, SVG, PNG files"
-                    />
+                      onFileAccepted={handleHashKeyDrop}
+                      acceptedFileTypes={['.txt', '.svg', '.png']}
+                      className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors"
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <Key className="w-8 h-8 text-gray-400" />
+                        <p>Drop hash key file here</p>
+                        <p className="text-sm text-gray-500">Supports TXT, SVG, PNG</p>
+                      </div>
+                    </DragDropZone>
                     <Input
                       value={hash}
                       onChange={(e) => handleHashChange(e.target.value)}
