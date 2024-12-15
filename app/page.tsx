@@ -50,6 +50,13 @@ export default function SteganographyTool() {
     setStatusLogs(prev => [...prev, { timestamp, message, type }])
   }
 
+  // Utility function to validate hash key
+  const isValidHashKey = (key: string) => {
+    if (!key) return false;
+    if (key.length !== 2187) return false;
+    return /^[-01]+$/.test(key);
+  };
+
   const handleGenerateHash = async () => {
     if (!input) {
       setError('Please enter text to generate a hash')
