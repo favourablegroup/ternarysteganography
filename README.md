@@ -1,75 +1,83 @@
-Today, I'm excited to share a project I've been working on - a web-based steganography tool that uses ternary encoding to hide messages within images. Built with Next.js, TypeScript, and modern web technologies, this tool offers a secure and user-friendly way to embed secret messages in ordinary images.
+# Ternary Steganography
 
-What is Steganography?
-Steganography is the art of hiding information in plain sight. Unlike encryption, which makes data unreadable, steganography conceals the very existence of the message. Think of it as hiding a letter inside a book - anyone can see the book, but only those who know where to look will find the letter.
+<div align="center">
+  <img src="public/logo.png" alt="Ternary Steganography Logo" width="200"/>
+  <p><em>Hide messages in images using ternary encoding</em></p>
+</div>
 
-What Makes This Tool Different?
+## 🌟 Features
 
-1. Ternary Encoding
-Instead of traditional binary encoding, this tool uses a base-3 (ternary) system. This unique approach provides:
+- 🔒 **Client-Side Security**: All operations happen in your browser - no server uploads, no data storage
+- 3️⃣ **Ternary Encoding**: Uses base-3 system for efficient and secure message embedding
+- 🖼️ **Multiple Format Support**: Works with PNG, JPG, and GIF images
+- 🎯 **LSB Steganography**: Undetectable message embedding using Least Significant Bit technique
+- 🔑 **Visual Hash Keys**: Unique fractal visualization for encryption keys
+- 🎨 **Modern UI**: Clean, responsive design with cyberpunk aesthetics
+- 📱 **Drag & Drop**: Easy file handling with drag-and-drop support
 
-More efficient data embedding
-Better resistance to detection
-Improved preservation of image quality
+## 🚀 Demo
 
-2. Client-Side Security
-All operations happen entirely in your browser:
+Try it out at [demo hosted on vercel](https://ternarysteganography.vercel.app/)
 
-No server uploads required
-No data storage
-Complete privacy for your messages and images
+## 🛠️ Tech Stack
 
-3. Modern UI/UX
-Drag-and-drop file handling
-Real-time status updates
-Visual hash key representation
-Matrix-style animations for that cyberpunk feel
+- [Next.js 14](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
 
-How to Use It
+## 🏗️ Installation
 
-Encrypt a Message
+1. Clone the repository:
+    bash
+    git clone https://github.com/yourusername/ternary-phonographic-steganography.git
+
+3. Install dependencies:
+    bash
+    CopyInsert
+    cd ternary-phonographic-steganography
+    npm install
+4. Run the development server:
+    bash
+    CopyInsert in Terminal
+    npm run dev
+    Open http://localhost:3000 in your browser
+
+📖 How to Use
+Encrypting a Message
+Navigate to the Encrypt page
 Enter your secret message
-Upload a cover image (supports PNG, JPG, GIF)
-Get a unique hash key for decryption
-
-Decrypt a Message
-Upload a steganographic image
+Upload or drag & drop a cover image
+Click "Generate Hash" to create your encryption key
+Save both the generated steganographic image and hash key
+Decrypting a Message
+Navigate to the Decrypt page
+Upload the steganographic image
 Enter the hash key
-Retrieve the hidden message
+Click "Decrypt" to reveal the hidden message
 
-Security Features
-Quantum-resistant ternary operations
-Visual hash key verification
-LSB (Least Significant Bit) steganography for undetectable embedding|
 
-Try It Out
-The project is open source and available on github, link in next post. You can try the live demo, link in next post.
+🔒 Privacy & Security
+✅ No server-side processing
+✅ No data storage
+✅ No analytics collection
+✅ Quantum-resistant ternary operations
+✅ Client-side image processing
 
-Technical Stack:
-Next.js 14
-TypeScript
-Tailwind CSS
-Modern React patterns and hooks
-Client-side image processing
 
-Future Plans
+🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-I'm actively working on adding new features:
-Support for more file formats
-Multiple encryption methods
-Batch processing capabilities
-Mobile-optimized interface
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Contribute
-
-This is an open-source project, and contributions are welcome! Whether it's improving the UI, adding new features, or enhancing security, feel free to:
-
-Submit pull requests
-Report issues
-Suggest new features
-Share feedback
-
-Privacy First
-In today's digital age, privacy matters more than ever. This tool was built with privacy at its core - no data leaves your device, no analytics are collected, and no traces are left behind.
-
-Try it out and let me know what you think! Whether you're a privacy enthusiast, a cybersecurity professional, or just someone interested in hiding secret messages, I'd love to hear your feedback.
+🙏 Acknowledgments
+The Matrix for UI inspiration
+shadcn/ui for beautiful components
+Next.js team for an amazing framework
+📧 Contact
