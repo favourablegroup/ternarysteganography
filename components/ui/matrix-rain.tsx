@@ -4,50 +4,55 @@ import { useEffect, useRef } from 'react'
 
 export function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
+  const dropsRef = useRef<number[]>([])
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    ctxRef.current = canvas.getContext('2d')
+    if (!ctxRef.current) return
 
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
     const columns = Math.floor(canvas.width / 15)
-    const drops: number[] = new Array(columns).fill(1)
+    dropsRef.current = new Array(columns).fill(1)
     const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンヴ'
 
+    const ctx = ctxRef.current
     ctx.fillStyle = '#000'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     function draw() {
+      const ctx = ctxRef.current
+      const canvas = canvasRef.current
+      if (!ctx || !canvas) return
+
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      for (let i = 0; i < drops.length; i++) {
+      for (let i = 0; i < dropsRef.current.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)]
         const opacity = Math.random() * 0.5 + 0.5
         ctx.fillStyle = `rgba(0, 255, 255, ${opacity})`
         ctx.font = '12px monospace'
-        ctx.fillText(text, i * 15, drops[i] * 15)
+        ctx.fillText(text, i * 15, dropsRef.current[i] * 15)
 
-        if (drops[i] * 15 > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0
+        if (dropsRef.current[i] * 15 > canvas.height && Math.random() > 0.975) {
+          dropsRef.current[i] = 0
         }
-        drops[i]++
+        dropsRef.current[i]++
       }
     }
 
     const interval = setInterval(draw, 25)
     const resizeHandler = () => {
+      if (!canvas || !ctxRef.current) return
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      drops.length = Math.floor(canvas.width / 15)
-      while (drops.length < Math.floor(canvas.width / 15)) {
-        drops.push(1)
-      }
+      dropsRef.current = new Array(Math.floor(canvas.width / 15)).fill(1)
     }
 
     window.addEventListener('resize', resizeHandler)
